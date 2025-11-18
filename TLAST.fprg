@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="tugas tutor"/>
+        <attribute name="authors" value="ASUS"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2025-11-18 09:12:42 PM"/>
+        <attribute name="created" value="QVNVUztMQVBUT1AtQTM4UVRDOFM7MjAyNS0xMS0xODswODo1MTo0NyBQTTsyNjU3"/>
+        <attribute name="edited" value="QVNVUztMQVBUT1AtQTM4UVRDOFM7MjAyNS0xMS0xODswODo1NjowMSBQTTsxOTtGcmFuayBOaXJveTtGUkFOSzsyMDIzLTExLTE4OzEwLjQ4LjUzIEFNOzEyUzI0MDU0X1JhaGVsIEp1cmkgRWxpc2FiZXQgU0lsYWJhbl9UdWdhc1R1dG9yLmZwcmc7MTAyNDM="/>
+        <attribute name="edited" value="QVNVUztMQVBUT1AtQTM4UVRDOFM7MjAyNS0xMS0xODswOToxMjo0MiBQTTsyOzI3NTk="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="judul, kode, matkul, dosen, waktu, nim, status, hasil1, show, perintah" type="String" array="True" size="10"/>
+            <declare name="prioritas, deadline, tingkat" type="Real" array="True" size="10"/>
+            <declare name="p, a, c, x, k, a1, a2, a3, temp1, temp2, tempp, fg, c1, c2" type="Integer" array="False" size=""/>
+            <declare name="tempz" type="Real" array="False" size=""/>
+            <declare name="temp21, temp3, temp4, temp5, temp6, temp7, temp8, tempx" type="String" array="False" size=""/>
+            <declare name="temp" type="Real" array="False" size=""/>
+            <assign variable="k" expression="0"/>
+            <assign variable="x" expression="0"/>
+            <assign variable="p" expression="0"/>
+            <assign variable="a2" expression="0"/>
+            <assign variable="a" expression="0"/>
+            <assign variable="temp1" expression="0"/>
+            <assign variable="tempp" expression="0"/>
+            <assign variable="temp2" expression="0"/>
+            <assign variable="fg" expression="0"/>
+            <for variable="fg" start="0" end="9" direction="inc" step="1">
+                <assign variable="perintah[fg]" expression="&quot;&quot;"/>
+                <assign variable="judul[fg]" expression="&quot;&quot;"/>
+                <assign variable="kode[fg]" expression="&quot;&quot;"/>
+                <assign variable="matkul[fg]" expression="&quot;&quot;"/>
+                <assign variable="dosen[fg]" expression="&quot;&quot;"/>
+                <assign variable="waktu[fg]" expression="&quot;&quot;"/>
+                <assign variable="nim[fg]" expression="&quot;&quot;"/>
+                <assign variable="tingkat[fg]" expression="0"/>
+                <assign variable="deadline[fg]" expression="0"/>
+                <assign variable="show[fg]" expression="&quot;&quot;"/>
+                <assign variable="status[fg]" expression="&quot;&quot;"/>
+            </for>
+            <for variable="p" start="0" end="9" direction="inc" step="1">
+                <input variable="perintah[p]"/>
+                <if expression="perintah[p] == &quot;---&quot;">
+                    <then>
+                        <assign variable="p" expression="10"/>
+                        <assign variable="a" expression="0"/>
+                    </then>
+                    <else>
+                        <if expression="perintah[p] = &quot;Add task&quot;">
+                            <then>
+                                <input variable="judul[p]"/>
+                                <input variable="kode[p]"/>
+                                <input variable="matkul[p]"/>
+                                <input variable="dosen[p]"/>
+                                <input variable="waktu[p]"/>
+                                <input variable="nim[p]"/>
+                                <input variable="tingkat[p]"/>
+                                <input variable="deadline[p]"/>
+                                <assign variable="prioritas[p]" expression="tingkat[p]* (1.0/deadline[p])"/>
+                                <if expression="prioritas[p] &gt; 3.0">
+                                    <then>
+                                        <assign variable="hasil1[p]" expression="&quot;Penting! Anda harus mengerjakan tugas ini segera&quot;"/>
+                                    </then>
+                                    <else>
+                                        <if expression="prioritas[p] &gt;= 1.5 and prioritas[p] &lt;= 3.0">
+                                            <then>
+                                                <assign variable="hasil1[p]" expression="&quot;Tugas ini memiliki prioritas menengah&quot;"/>
+                                            </then>
+                                            <else>
+                                                <if expression="prioritas[p] &lt; 1.5">
+                                                    <then>
+                                                        <assign variable="hasil1[p]" expression="&quot;Tugas ini relatif ringan, namun jangan tunda terlalu lama&quot;"/>
+                                                    </then>
+                                                    <else/>
+                                                </if>
+                                            </else>
+                                        </if>
+                                    </else>
+                                </if>
+                                <input variable="status[p]"/>
+                                <assign variable="a1" expression="p"/>
+                            </then>
+                            <else>
+                                <if expression="perintah[p] = &quot;Update task status&quot;">
+                                    <then>
+                                        <input variable="kode[p]"/>
+                                        <assign variable="a" expression="p"/>
+                                        <for variable="a2" start="0" end="a" direction="inc" step="1">
+                                            <for variable="a3" start="1" end="a" direction="inc" step="1">
+                                                <if expression="kode[a2] == kode[a3]">
+                                                    <then>
+                                                        <input variable="status[a2]"/>
+                                                        <input variable="show[a2]"/>
+                                                        <assign variable="temp1" expression="a3"/>
+                                                        <assign variable="a3" expression="a"/>
+                                                        <assign variable="tempp" expression="a2"/>
+                                                        <assign variable="a2" expression="a"/>
+                                                    </then>
+                                                    <else/>
+                                                </if>
+                                            </for>
+                                        </for>
+                                    </then>
+                                    <else/>
+                                </if>
+                                <assign variable="a" expression="p-1"/>
+                                <assign variable="p" expression="a"/>
+                                <assign variable="a3" expression="temp1"/>
+                                <assign variable="a2" expression="tempp"/>
+                            </else>
+                        </if>
+                        <assign variable="temp2" expression="p"/>
+                    </else>
+                </if>
+                <assign variable="a" expression="temp2"/>
+            </for>
+        </body>
+    </function>
+    <function name="Addtaks" type="None" variable="">
+        <parameters/>
+        <body>
+            <assign variable="" expression=""/>
+        </body>
+    </function>
+</flowgorithm>
